@@ -1,13 +1,19 @@
 import 'package:ecommerce_concept/modules/app_state/app_component.dart';
 import 'package:ecommerce_concept/resources/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'resources/app_themes.dart';
 
 void main() async {
   await AppComponents().init();
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 }
 
 class MyApp extends StatelessWidget {

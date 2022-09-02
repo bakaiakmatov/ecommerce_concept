@@ -6,6 +6,12 @@ class AppStyles {
 
   static const mainFont = 'MarkPro';
 
+  static TextStyle text35w700 = TextStyle(
+    fontFamily: mainFont,
+    fontWeight: FontWeight.w700,
+    fontSize: 35.sp,
+  );
+
   static TextStyle text30w800 = TextStyle(
     fontFamily: mainFont,
     fontWeight: FontWeight.w400,
@@ -16,6 +22,21 @@ class AppStyles {
     fontFamily: mainFont,
     fontWeight: FontWeight.w700,
     fontSize: 25.sp,
+  );
+  static TextStyle text24w500 = TextStyle(
+    fontFamily: mainFont,
+    fontWeight: FontWeight.w500,
+    fontSize: 24.sp,
+  );
+  static TextStyle text20w700 = TextStyle(
+    fontFamily: mainFont,
+    fontWeight: FontWeight.w700,
+    fontSize: 20.sp,
+  );
+  static TextStyle text20w500 = TextStyle(
+    fontFamily: mainFont,
+    fontWeight: FontWeight.w500,
+    fontSize: 20.sp,
   );
   static TextStyle text18w500 = TextStyle(
     fontFamily: mainFont,
@@ -43,7 +64,11 @@ class AppStyles {
     fontWeight: FontWeight.w400,
     fontSize: 15.sp,
   );
-
+  static TextStyle text13w700 = TextStyle(
+    fontFamily: mainFont,
+    fontWeight: FontWeight.w700,
+    fontSize: 13.sp,
+  );
   static TextStyle text12w500 = TextStyle(
     fontFamily: mainFont,
     fontWeight: FontWeight.w500,

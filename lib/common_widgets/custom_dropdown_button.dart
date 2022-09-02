@@ -24,7 +24,7 @@ class CustomDropdownButton<T> extends StatelessWidget {
       height: 37.h,
       child: DropdownButtonFormField<T>(
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.zero,
+          contentPadding: const EdgeInsets.only(left: 16),
           hintText: hintText,
           filled: true,
           fillColor: AppColors.whiteColor,

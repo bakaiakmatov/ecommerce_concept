@@ -6,7 +6,15 @@ import '../../../../resources/app_colors.dart';
 import '../../../../resources/app_styles.dart';
 
 class BottomSheetWidget extends StatelessWidget {
-  const BottomSheetWidget({Key? key}) : super(key: key);
+  final List<String> brand;
+  final List<String> price;
+  final List<String> size;
+  const BottomSheetWidget({
+    Key? key,
+    required this.brand,
+    required this.price,
+    required this.size,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,15 +87,17 @@ class BottomSheetWidget extends StatelessWidget {
           SizedBox(height: 12.h),
           CustomDropdownButton(
             hintText: 'Select brand',
-            items: [
-              DropdownMenuItem(
-                value: 'All',
-                child: Text(
-                  'All',
-                  style: AppStyles.text16w700.copyWith(color: AppColors.stratosColor),
-                ),
-              ),
-            ],
+            items: brand
+                .map(
+                  (e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      style: AppStyles.text16w700.copyWith(color: AppColors.stratosColor),
+                    ),
+                  ),
+                )
+                .toList(),
             onChanged: (value) {},
           ),
           SizedBox(height: 12.h),
@@ -97,16 +107,18 @@ class BottomSheetWidget extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           CustomDropdownButton(
-            hintText: 'Select brand',
-            items: [
-              DropdownMenuItem(
-                value: 'All',
-                child: Text(
-                  'All',
-                  style: AppStyles.text16w700.copyWith(color: AppColors.stratosColor),
-                ),
-              ),
-            ],
+            hintText: 'Select Price',
+            items: price
+                .map(
+                  (e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      style: AppStyles.text16w700.copyWith(color: AppColors.stratosColor),
+                    ),
+                  ),
+                )
+                .toList(),
             onChanged: (value) {},
           ),
           SizedBox(height: 12.h),
@@ -114,19 +126,23 @@ class BottomSheetWidget extends StatelessWidget {
             'Size',
             style: AppStyles.text18w500.copyWith(color: AppColors.stratosColor),
           ),
+          SizedBox(height: 12.h),
           CustomDropdownButton(
-            hintText: 'Select brand',
-            items: [
-              DropdownMenuItem(
-                value: 'All',
-                child: Text(
-                  'All',
-                  style: AppStyles.text16w700.copyWith(color: AppColors.stratosColor),
-                ),
-              ),
-            ],
+            hintText: 'Select Size',
+            items: size
+                .map(
+                  (e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      style: AppStyles.text16w700.copyWith(color: AppColors.stratosColor),
+                    ),
+                  ),
+                )
+                .toList(),
             onChanged: (value) {},
           ),
+          SizedBox(height: 12.h),
         ],
       ),
     );

@@ -23,8 +23,7 @@ class SearchWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
               child: SizedBox(
-                height: 34.h,
-                width: 300.w,
+                height: 36.h,
                 child: TextField(
                   maxLines: 1,
                   decoration: InputDecoration(

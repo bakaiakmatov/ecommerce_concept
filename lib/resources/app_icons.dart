@@ -10,4 +10,8 @@ class AppIconPaths {
   static const health = '$_defPath/health.svg';
   static const phone = '$_defPath/phone.svg';
   static const search = '$_defPath/search.svg';
+  static const camera = '$_defPath/camera.svg';
+  static const memory = '$_defPath/memory.svg';
+  static const phonememory = '$_defPath/phonememory.svg';
+  static const processor = '$_defPath/processor.svg';
 }

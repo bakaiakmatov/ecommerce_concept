@@ -16,19 +16,19 @@ class _MainProductsApi implements MainProductsApi {
   String? baseUrl;
 
   @override
-  Future<Products> fetchMainProducts() async {
+  Future<MainProducts> fetchMainProducts() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Products>(
+        _setStreamType<MainProducts>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(
                     _dio.options, 'v3/654bd15e-b121-49ba-a588-960956b15175',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Products.fromJson(_result.data!);
+    final value = MainProducts.fromJson(_result.data!);
     return value;
   }
 

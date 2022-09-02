@@ -1,9 +1,9 @@
 import 'package:ecommerce_concept/modules/main/api/client/main_products_api.dart';
-import 'package:ecommerce_concept/modules/main/interactor/main_products_repository.dart';
 import 'package:ecommerce_concept/modules/main/ui/res/category_card_res.dart';
 import 'package:ecommerce_concept/modules/main/ui/screens/main_screen_provider.dart';
+import 'package:ecommerce_concept/modules/main/ui/widgets/bottom_navigation_bar.dart';
 import 'package:ecommerce_concept/modules/main/ui/widgets/carousel_slider_widget.dart';
-import 'package:ecommerce_concept/modules/main/ui/widgets/category_card_widget.dart';
+import 'package:ecommerce_concept/modules/main/ui/widgets/categories_widget.dart';
 import 'package:ecommerce_concept/modules/main/ui/widgets/product_card_widget.dart';
 import 'package:ecommerce_concept/resources/app_colors.dart';
 import 'package:ecommerce_concept/resources/app_styles.dart';
@@ -16,12 +16,18 @@ import 'package:provider/provider.dart';
 import '../../../../common_widgets/custom_appbar.dart';
 import '../../../../common_widgets/custom_bottom_sheet.dart';
 import '../../../../resources/app_icons.dart';
+import '../../interactor/main_products_repository.dart';
 import '../widgets/bottom_sheet_widget.dart';
 import '../widgets/search_widget.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -31,7 +37,7 @@ class MainScreen extends StatelessWidget {
         ),
       ),
       child: Consumer<MainScreenProvider>(
-        builder: (context, provider, child) => Scaffold(
+        builder: (context, provider, _) => Scaffold(
           appBar: CustomAppbar(
             title: Row(
               children: [
@@ -41,6 +47,10 @@ class MainScreen extends StatelessWidget {
                   'Zihuatanejo, Gro',
                   style: AppStyles.text15w400.copyWith(color: AppColors.stratosColor),
                 ),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  color: AppColors.grayColor,
+                )
               ],
             ),
             rightIcon: IconButton(
@@ -50,7 +60,14 @@ class MainScreen extends StatelessWidget {
               icon: SvgPicture.asset(AppIconPaths.filter),
               onPressed: () {
                 print('Show Bottom Sheet');
-                showCustomBottomSheet(context, const BottomSheetWidget());
+                showCustomBottomSheet(
+                  context,
+                  BottomSheetWidget(
+                    brand: provider.brand,
+                    price: provider.price,
+                    size: provider.size,
+                  ),
+                );
               },
             ),
           ),
@@ -81,32 +98,23 @@ class MainScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 26.h),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: CategoryCardRes.categoryList
-                        .map(
-                          ((e) => CategoryCardWidget(
-                                icon: e.icon,
-                                text: e.text,
-                              )),
-                        )
-                        .toList(),
-                  ),
+                SizedBox(height: 18.h),
+                CategriesWidget(
+                  list: CategoryCardRes.categoryList,
+                  onChanged: (category) {},
                 ),
                 const SearchWidget(),
-                SizedBox(
-                  height: 24.h,
+                SizedBox(height: 16.h),
+                CarouselSliderWidget(info: provider.products?.homeStore ?? []),
+                SizedBox(height: 8.h),
+                ProductCardWidget(
+                  bestSeller: provider.products?.bestSeller ?? [],
+                  onFavouritesChanged: provider.onFavouritesChanged, 
                 ),
-                const CarouselSliderWidget(),
-                SizedBox(
-                  height: 8.h,
-                ),
-                const ProductCardWidget()
               ],
             ),
           ),
+          bottomNavigationBar: const BottomNavigationBarWidget(),
         ),
       ),
     );

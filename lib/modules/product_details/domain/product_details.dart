@@ -1,0 +1,37 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'product_details.g.dart';
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class ProductDetails {
+  ProductDetails({
+    required this.cpu,
+    required this.camera,
+    required this.capacity,
+    required this.color,
+    required this.id,
+    required this.images,
+    required this.isFavorites,
+    required this.price,
+    required this.rating,
+    required this.sd,
+    required this.ssd,
+    required this.title,
+  });
+
+  final String? cpu;
+  final String? camera;
+  final List<String>? capacity;
+  final List<String>? color;
+  final String? id;
+  final List<String>? images;
+  final bool? isFavorites;
+  final int? price;
+  final double? rating;
+  final String? sd;
+  final String? ssd;
+  final String? title;
+
+  factory ProductDetails.fromJson(Map<String, dynamic> json) => _$ProductDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductDetailsToJson(this);
+}

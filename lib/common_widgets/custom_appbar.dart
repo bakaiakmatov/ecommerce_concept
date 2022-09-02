@@ -19,13 +19,16 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          icon ?? const SizedBox(),
-          if (title != null) title!,
-          if (rightIcon != null) rightIcon!,
-        ],
+      title: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            icon ?? const SizedBox(),
+            if (title != null) title!,
+            if (rightIcon != null) rightIcon!,
+          ],
+        ),
       ),
     );
   }

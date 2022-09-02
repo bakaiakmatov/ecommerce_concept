@@ -7,28 +7,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CategoryCardWidget extends StatelessWidget {
   final String icon;
   final String text;
+  final Color color;
+  final VoidCallback onTap;
   const CategoryCardWidget({
     Key? key,
     required this.icon,
     required this.text,
+    required this.color,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 22.0.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.0.h),
       child: Column(
         children: [
           InkWell(
             borderRadius: BorderRadius.circular(50.0),
             splashColor: AppColors.stratosColor,
-            onTap: () {},
+            onTap: onTap,
             child: SizedBox(
               height: 71.h,
               width: 71.w,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: color,
                   borderRadius: BorderRadius.circular(64.w),
                   boxShadow: [
                     BoxShadow(

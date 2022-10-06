@@ -1,3 +1,4 @@
+import 'package:ecommerce_concept/common_widgets/custom_button_widget.dart';
 import 'package:ecommerce_concept/modules/product_details/ui/widgets/row_characteristic_widget.dart';
 import 'package:ecommerce_concept/resources/app_colors.dart';
 import 'package:ecommerce_concept/resources/app_styles.dart';
@@ -28,17 +29,21 @@ class ShopWidget extends StatefulWidget {
 }
 
 class _ShopWidgetState extends State<ShopWidget> {
-  String? selectedColor;
-  String? selectedMemory;
+  late String selectedMemory;
+  late String selectedColorIcon;
 
-  // @override
-  // void initState() {
-  //   selectedColor == widget.color.first;
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    selectedColorIcon = widget.color.first;
+    selectedMemory = widget.capacity.first;
+    debugPrint('=> ${widget.color.first}');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('selectedColorIcon => $selectedColorIcon');
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,103 +64,88 @@ class _ShopWidgetState extends State<ShopWidget> {
         const SizedBox(height: 16),
         Row(
           children: [
-            Row(
-              children: widget.color
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.only(right: 16),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedColor = e;
-                            selectedMemory = e;
-                          });
-                        },
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                              height: 39,
-                              width: 39,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: Color(int.parse('0xFF' + e.substring(1))),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(65),
-                                  ),
+            ...widget.color
+                .map(
+                  (color) => Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedColorIcon = color;
+                        });
+                      },
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            height: 39,
+                            width: 39,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: Color(int.parse('0xFF' + color.substring(1))),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(65),
                                 ),
                               ),
                             ),
-                            if (selectedColor == e)
-                              const Icon(
-                                Icons.check_sharp,
-                                color: AppColors.whiteColor,
-                                size: 28,
-                              ),
-                          ],
-                        ),
+                          ),
+                          selectedColorIcon == color
+                              ? const Positioned(
+                                  top: 4,
+                                  left: 4,
+                                  child: Icon(
+                                    Icons.check_sharp,
+                                    color: AppColors.whiteColor,
+                                    size: 28,
+                                  ),
+                                )
+                              : const SizedBox()
+                        ],
                       ),
                     ),
-                  )
-                  .toList(),
-            ),
+                  ),
+                )
+                .toList(),
             SizedBox(width: 60.w),
-            Row(
-              children: widget.capacity
-                  .map(
-                    (e) => Padding(
+            ...widget.capacity
+                .map(
+                  (e) => GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedMemory = e;
+                      });
+                    },
+                    child: Padding(
                       padding: const EdgeInsets.only(right: 16),
                       child: SizedBox(
                         height: 28.h,
                         width: 68.w,
                         child: DecoratedBox(
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              color: AppColors.persimmonColor),
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            color: selectedMemory == e ? AppColors.persimmonColor : AppColors.whiteColor,
+                          ),
                           child: Center(
-                            child: Text(e, style: AppStyles.text13w700.copyWith(color: AppColors.whiteColor)),
+                            child: Text(
+                              e,
+                              style: AppStyles.text13w700.copyWith(
+                                color: selectedMemory == e ? AppColors.whiteColor : AppColors.grayColor,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  )
-                  .toList(),
-            )
+                  ),
+                )
+                .toList(),
           ],
         ),
         SizedBox(height: 26.h),
-        SizedBox(
-          height: 58.h,
-          width: double.maxFinite,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: AppColors.persimmonColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 38),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Add to Cart',
-                    style: AppStyles.text20w700.copyWith(
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                  Text(
-                    '${widget.price}',
-                    style: AppStyles.text20w700.copyWith(
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        CustomButtonWidget(
+          price: widget.price,
+          title: 'Add to Cart',
         )
       ],
     );

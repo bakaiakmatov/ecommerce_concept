@@ -62,7 +62,6 @@ class BottomNavigationBarWidget extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  // Navigator.pushNamed(context, AppRoutes.myCartScreen);
                 },
                 icon: const Icon(
                   Icons.account_circle_outlined,

@@ -1,3 +1,4 @@
+import 'package:ecommerce_concept/common_widgets/custom_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -55,29 +56,7 @@ class BottomMenuWidget extends StatelessWidget {
           height: 0.5,
         ),
         SizedBox(height: 32.h),
-        GestureDetector(
-          onTap: () {
-            print('Checkout');
-          },
-          child: SizedBox(
-            height: 54.h,
-            width: double.maxFinite,
-            child: DecoratedBox(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  color: AppColors.persimmonColor),
-              child: Center(
-                child: Text(
-                  'Checkout',
-                  style: AppStyles.text20w700.copyWith(color: AppColors.whiteColor),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ),
-        ),
+        const CustomButtonWidget(title: 'Checkout')
       ],
     );
   }

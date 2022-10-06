@@ -11,16 +11,30 @@ class ProductDetailsScreenProvider extends ChangeNotifier {
     fetchProductDetails();
   }
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool val) {
+    if (val != _isLoading) {
+      _isLoading = val;
+      notifyListeners();
+    }
+  }
+
   ProductDetails? _productDetails;
   ProductDetails? get productDetails => _productDetails;
 
   void fetchProductDetails() async {
+    isLoading = true;
     try {
-      _productDetails = await _repository.productDetailsRepository();
+       _productDetails = await _repository.productDetailsRepository();
       debugPrint('ТУТ => ${_productDetails!.toJson()}');
       notifyListeners();
     } on DioError catch (e) {
       debugPrint('fetchProductDetails $e');
+    } finally {
+      isLoading = false;
     }
   }
 }

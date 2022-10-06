@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_concept/modules/main/domain/main_products.dart';
 import 'package:ecommerce_concept/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../resources/app_styles.dart';
 
 class CarouselSliderWidget extends StatefulWidget {

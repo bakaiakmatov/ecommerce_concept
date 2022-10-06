@@ -16,7 +16,9 @@ class SliderWidget extends StatefulWidget {
 }
 
 class _SliderWidgetState extends State<SliderWidget> {
-  final PageController controller = PageController(viewportFraction: 0.7);
+  final PageController controller = PageController(
+    viewportFraction: 0.9,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -39,27 +41,31 @@ class _SliderWidgetState extends State<SliderWidget> {
               ),
             ],
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(30),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              right: 32,
             ),
-            child: CachedNetworkImage(
-              height: 316.h,
-              // width: 300,
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.center,
-              imageUrl: widget.images[index],
-              errorWidget: (context, url, error) => const SizedBox(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3,
-                    color: AppColors.stratosColor,
-                  ),
-                ),
-                width: 32,
-                height: 8,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30),
               ),
-              colorBlendMode: BlendMode.xor,
+              child: CachedNetworkImage(
+                height: 316.h,
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.center,
+                imageUrl: widget.images[index],
+                errorWidget: (context, url, error) => const SizedBox(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      color: AppColors.stratosColor,
+                    ),
+                  ),
+                  width: 32,
+                  height: 8,
+                ),
+                colorBlendMode: BlendMode.xor,
+              ),
             ),
           ),
         ),

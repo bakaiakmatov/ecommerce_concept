@@ -10,16 +10,30 @@ class MyCartScreenProvider extends ChangeNotifier {
     fetchMyCart();
   }
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool val) {
+    if (val != _isLoading) {
+      _isLoading = val;
+      notifyListeners();
+    }
+  }
+
   MyCart? _myCart;
   MyCart? get myCart => _myCart;
 
   void fetchMyCart() async {
+    isLoading = true;
     try {
       _myCart = await _repository.myCartRepository();
-      print(_myCart.toString());
+      debugPrint(_myCart.toString());
       notifyListeners();
     } on DioError catch (e) {
       debugPrint('fetchMyCart $e');
+    } finally {
+      isLoading = false;
     }
   }
 

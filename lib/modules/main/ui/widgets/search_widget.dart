@@ -47,7 +47,7 @@ class SearchWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(50.0),
             splashColor: AppColors.stratosColor,
             onTap: () {
-              print('Search');
+              debugPrint('Search');
             },
             child: SizedBox(
               height: 34.h,

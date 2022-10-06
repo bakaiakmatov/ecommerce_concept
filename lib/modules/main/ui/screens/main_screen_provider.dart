@@ -13,15 +13,29 @@ class MainScreenProvider extends ChangeNotifier {
   MainProducts? _products;
   MainProducts? get products => _products;
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool val) {
+    if (val != _isLoading) {
+      _isLoading = val;
+      notifyListeners();
+    }
+  }
+
   void fetchProducts() async {
+    isLoading = true;
     try {
       _products = await _repository.mainProductsRepository();
-      print(_products!.bestSeller.toString());
-      print(_products!.homeStore.toString());
+      debugPrint(_products!.bestSeller.toString());
+      debugPrint(_products!.homeStore.toString());
 
       notifyListeners();
     } on DioError catch (e) {
       debugPrint('fetchProducts $e');
+    } finally {
+      isLoading = false;
     }
   }
 
